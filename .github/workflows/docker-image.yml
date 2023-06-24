@@ -33,10 +33,11 @@ jobs:
       uses: Azure/setup-helm@v3
       with:
         # Version of helm
-        version: v3.5.0
+        version: v3.12.0
     - name: Helm registry login
       id: helm-registry-login
       run: |
+       export HELM_EXPERIMENTAL_OCI=1
        helm registry login ${{ secrets.registry }}.azurecr.io --username ${{secrets.service_principal}} --password ${{secrets.service_principal_password}}
     - name: Helm package
       id: helm-package
