@@ -37,6 +37,7 @@ jobs:
     - name: Helm registry login
       id: helm-registry-login
       run: |
+       export HELM_EXPERIMENTAL_OCI=1
        helm registry login ${{ secrets.registry }}.azurecr.io --username ${{secrets.service_principal}} --password ${{secrets.service_principal_password}}
     - name: Helm package
       id: helm-package
