@@ -29,3 +29,23 @@ jobs:
       id: build-image
       run: |
        az acr build --image netcoresample:${{ github.sha }} --registry ${{ secrets.registry }} --file "Dockerfile" .
+    - name: Helm tool installer
+      uses: Azure/setup-helm@v3
+      with:
+        # Version of helm
+        version: v3.5.0
+    - name: Helm registry login
+      id: helm-registry-login
+      run: |
+       helm registry login ${{ secrets.registry }}.azurecr.io --username ${{secrets.service_principal}} --password ${{secrets.service_principal_password}}
+    - name: Helm package
+      id: helm-package
+      run: |
+       helm package charts
+    - name: helm push
+      id: helm-push
+      run: |
+       helm push net-core-sample-chart-0.1.0.tgz oci://${{ secrets.registry }}.azurecr.io/helm
+      
+
+      
