@@ -1,0 +1,33 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Azure Container Registry Build
+      uses: Azure/acr-build@v1
+      with:
+        # Service Principal with Contributor role on the ACR
+        service_principal: ${{ secrets.service_principal }}
+        # Service Principal password
+        service_principal_password: ${{ secrets.service_principal_password }}
+        # Azure Container Registry tenant
+        tenant: ${{ secrets.tenant }}
+        # The name of the ACR, minus the .azurecr.io
+        registry: ${{ secrets.registry }}
+        # Repository to use
+        repository: ${{ secrets.repository }}
+        # The folder in the Github repo that holds the source
+        folder: .
