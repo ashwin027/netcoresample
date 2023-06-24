@@ -1,7 +1,6 @@
 apiVersion: v2
-name: charts
-description: A Helm chart for Kubernetes
-
+name: net-core-sample-chart
+description: A helm chart for .net core applications
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
