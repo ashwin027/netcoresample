@@ -14,7 +14,6 @@ namespace netcoreappv1.Pages
 
         public void OnGet()
         {
-
         }
     }
 }

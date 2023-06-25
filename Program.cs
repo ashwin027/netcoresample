@@ -13,6 +13,9 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+Console.WriteLine(Environment.GetEnvironmentVariable("USERNAME"));
+Console.WriteLine(Environment.GetEnvironmentVariable("PASSWORD"));
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
