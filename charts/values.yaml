@@ -10,8 +10,8 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-username: <path:kv/mysql#username>
-password: <path:kv/mysql#password>
+username: <path:kv-v2/data/mysql#username>
+password: <path:kv-v2/data/mysql#password>
 
 imagePullSecrets:
   - name: docker-image-secret    
